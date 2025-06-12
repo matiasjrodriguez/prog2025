@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "tp_thash.h"
 
 void main() {
     int opcion;
@@ -15,13 +16,14 @@ void main() {
 
         switch (opcion) {
             case 4:
-                menuPunto4();
+                th_ej4_abm();
                 break;
             case 5:
                 menuPunto5();
                 break;
             case 6:
-                menuPunto6();
+                th_ej6_covid();
+                //menuPunto6_v2();
                 break;
             case 0:
                 printf("Saliendo...\n");

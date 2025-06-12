@@ -1,8 +1,9 @@
-#ifndef TP_ARBOLES_H
-#define TP_ARBOLES_H
+#ifndef TP_THASH_H
+#define TP_THASH_H
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <time.h>
 #include "../libs/listas/headers/listas.h"
 #include "../libs/tablashash/headers/tabla_hash.h"
 #include "../libs/tipoElemento/headers/tipo_elemento.h"
@@ -12,16 +13,46 @@
 #include "../libs/arboles/headers/arbol-binario-busqueda.h"
 #include "../libs/listas/headers/listas.h"
 
+int funcion_hash_mod(int clave);
+
 struct AlumnosRep{   
-int legajo;   
-char apellido[20];   
-char nombre[20];   
-char domicilio[20];   
+int legajo;
+char apellido[20];
+char nombre[20];
+char domicilio[20];
 char TE[15];    //telefono
-bool Estado; 
+bool Estado;
 };
 typedef struct AlumnosRep Alumnos;
+struct FichaVacunadosRep{
 
+   int fecha;
+   int DNI;
+   char apellido[20];
+   char nombre[20];
+};
+typedef struct FichaVacunadosRep FichaVacunados;
+
+
+void cargando_alumno(Alumnos* alumno);
+void alta_alumno(TablaHash tabla, FILE* archivo, int legajo, int* indice);
+int cargarTabla(TablaHash tabla, FILE* archivo);
+void buscar_alumno(int indice, FILE* archivo);
+//void buscar_alumno(int* indice, FILE* archivo);
+void alta_logica(int indice, FILE* archivo);
+//void alta_logica(int* indice, FILE* archivo);
+void baja_alumno(int clave, TablaHash tabla, FILE* archivo);
+void modificar_alumno_nombre(FILE* archivo, int indice);
+void modoficar_alumno(int clave,TablaHash tabla,FILE* archivo);
+void modificar_alumno_apellido(FILE* archivo, int indice);
+void modificar_alumno_direccion(FILE* archivo, int indice);
+void modificar_alumno_telefono(FILE* archivo, int indice);
+void cargar_vacunados(TablaHash tabla);
+void ingresando_vacunado(FichaVacunados *ficha);
+int ingresando_fecha();
+void imprimir_listado_vacunados(NodoArbol nodo, FichaVacunados *ficha);
+void mostrar_vacunados(TablaHash tabla);
+int ingresando_dni();
 /**
 4. Desarrollar un algoritmo que dado un archivo que contendrá los datos de alumnos  (legajo, apellido, nombres, domicilio, TE) 
    genere una tabla hash donde la clave será el legajo y se guardará como dato la posición física 
